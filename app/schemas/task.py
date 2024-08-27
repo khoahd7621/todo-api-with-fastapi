@@ -22,7 +22,7 @@ class Task(Base, BaseEntity):
     description = Column(String)
     status = Column(Enum(ETaskStatus), nullable=False, default=ETaskStatus.TODO)
     priority = Column(Enum(EPriority), nullable=False, default=EPriority.LOW)
-    company_id = Column(Uuid, ForeignKey("users.id"), nullable=False)
+    company_id = Column(Uuid, ForeignKey("companies.id"), nullable=False)
     user_id = Column(Uuid, ForeignKey("users.id"), nullable=True)
 
     company = relationship("Company")

@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, SmallInteger
 from sqlalchemy.orm import relationship
 
 from database import Base
-from base_entity import BaseEntity
+from .base_entity import BaseEntity
 
 class Company(Base, BaseEntity):
     __tablename__ = "companies"
@@ -11,5 +11,4 @@ class Company(Base, BaseEntity):
     description = Column(String)
     rating = Column(SmallInteger, default=0)
 
-    tasks = relationship('Task', back_populates='company')
-    users = relationship('User', secondary='company_users', back_populates='companies')
+    tasks = relationship("Task", back_populates='company')

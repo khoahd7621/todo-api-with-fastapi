@@ -18,8 +18,7 @@ class User(Base, BaseEntity):
     is_active = Column(Boolean, default=True)
     is_admin = Column(Boolean, default=False)
 
-    companies = relationship('Company', secondary='company_users', back_populates='users')
-    tasks = relationship('Task', back_populates='user')
+    tasks = relationship("Task", back_populates="user")
 
 
 def get_password_hash(password):
