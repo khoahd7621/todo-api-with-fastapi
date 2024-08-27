@@ -41,7 +41,6 @@ def upgrade() -> None:
     companies = Table('companies', meta, autoload_with=op.get_bind())
     users = Table('users', meta, autoload_with=op.get_bind())
     tasks = Table('tasks', meta, autoload_with=op.get_bind())
-    company_users = Table('company_users', meta, autoload_with=op.get_bind())
 
     op.bulk_insert(
         companies,
@@ -78,7 +77,8 @@ def upgrade() -> None:
                 'is_active': True,
                 'is_admin': True,
                 'created_at': created_at,
-                'updated_at': updated_at
+                'updated_at': updated_at,
+                'company_id': companyid_1
             },
             {
                 'id': user_id_2,
@@ -90,27 +90,8 @@ def upgrade() -> None:
                 'is_active': True,
                 'is_admin': False,
                 'created_at': created_at,
-                'updated_at': updated_at
-            }
-        ]
-    )
-
-    op.bulk_insert(
-        company_users,
-        [
-            {
-                'id': uuid4(),
-                'company_id': companyid_1,
-                'user_id': user_id_2,
-                'created_at': created_at,
-                'updated_at': updated_at
-            },
-            {
-                'id': uuid4(),
-                'company_id': companyid_2,
-                'user_id': user_id_2,
-                'created_at': created_at,
-                'updated_at': updated_at
+                'updated_at': updated_at,
+                'company_id': companyid_2
             }
         ]
     )
@@ -135,7 +116,7 @@ def upgrade() -> None:
                 'description': 'Task 2 description',
                 'status': ETaskStatus.TODO.name,
                 'priority': EPriority.LOW.name,
-                'company_id': companyid_1,
+                'company_id': companyid_2,
                 'user_id': user_id_1,
                 'created_at': created_at,
                 'updated_at': updated_at
@@ -147,7 +128,7 @@ def upgrade() -> None:
                 'status': ETaskStatus.DONE.name,
                 'priority': EPriority.MEDIUM.name,
                 'company_id': companyid_1,
-                'user_id': user_id_1,
+                'user_id': user_id_2,
                 'created_at': created_at,
                 'updated_at': updated_at
             },
@@ -157,8 +138,8 @@ def upgrade() -> None:
                 'description': 'Task 4 description',
                 'status': ETaskStatus.TODO.name,
                 'priority': EPriority.MEDIUM.name,
-                'company_id': companyid_1,
-                'user_id': user_id_1,
+                'company_id': companyid_2,
+                'user_id': user_id_2,
                 'created_at': created_at,
                 'updated_at': updated_at
             },

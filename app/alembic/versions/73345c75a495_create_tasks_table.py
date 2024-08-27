@@ -15,7 +15,7 @@ from schemas.task import ETaskStatus, EPriority
 
 # revision identifiers, used by Alembic.
 revision: str = '73345c75a495'
-down_revision: Union[str, None] = '36ea878f783c'
+down_revision: Union[str, None] = '04216a465596'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

@@ -30,4 +30,3 @@ Base = declarative_base()
 from schemas.user import User
 from schemas.company import Company
 from schemas.task import Task
-from schemas.company_user import CompanyUser

@@ -30,11 +30,13 @@ def upgrade() -> None:
         sa.Column('is_active', sa.Boolean, default=True),
         sa.Column('is_admin', sa.Boolean, default=False),
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime)
+        sa.Column('updated_at', sa.DateTime),
+        sa.Column('company_id', sa.UUID, nullable=False),
     )
     op.create_index('idx_usr_email', 'users', ['email'])
     op.create_index('idx_usr_username', 'users', ['username'])
     op.create_index('idx_usr_name', 'users', ['first_name', 'last_name'])
+    op.create_foreign_key('fk_user_company', 'users', 'companies', ['company_id'], ['id'])
 
 
 def downgrade() -> None:

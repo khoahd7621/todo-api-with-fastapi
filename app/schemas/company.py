@@ -12,3 +12,4 @@ class Company(Base, BaseEntity):
     rating = Column(SmallInteger, default=0)
 
     tasks = relationship("Task", back_populates='company')
+    users = relationship("User", back_populates='company')
