@@ -5,14 +5,32 @@ from uuid import UUID
 
 from schemas.task import ETaskStatus, EPriority
 
-class TaskModel(BaseModel):
+class SearchTaskModel():
+    def __init__(self, company_id, user_id, page, size) -> None:
+        self.company_id = company_id
+        self.user_id = user_id
+        self.page = page
+        self.size = size
+
+
+class TaskCreateModel(BaseModel):
     summary: str = Field(min_length=2)
     description: Optional[str]
-    status: ETaskStatus = Field(default=ETaskStatus.TODO)
     priority: EPriority = Field(default=EPriority.LOW)
     company_id: UUID
     user_id: Optional[UUID]
 
+
+class TaskUpdateModel(BaseModel):
+    summary: Optional[UUID] = Field(min_length=2)
+    description: Optional[str]
+    priority: EPriority = Field(default=EPriority.LOW)
+    company_id: Optional[UUID]
+    user_id: Optional[UUID]
+
+
+class TaskUpdateStatusModel(BaseModel):
+    status: ETaskStatus
 
 class TaskViewModel(BaseModel):
     id: UUID

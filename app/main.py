@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from routers import auth, company
+from routers import auth, company, task
 
 
 app = FastAPI()
 
 app.include_router(auth.router)
 app.include_router(company.router)
+app.include_router(task.router)
 
 @app.get("/", tags=["Health Check"])
 async def health_check():

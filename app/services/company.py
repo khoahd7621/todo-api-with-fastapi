@@ -12,7 +12,7 @@ def get_companies(db: Session, conds: SearchCompanyModel) -> List[Company]:
     # Default of joinedload is LEFT OUTER JOIN
     query = select(Company).options(
         joinedload(Company.tasks, innerjoin=True),
-        joinedload(Company.users))
+        joinedload(Company.users, innerjoin=True))
     
     if conds.name is not None:
         query = query.filter(Company.name.like(f"%{conds.name}%"))
