@@ -28,6 +28,8 @@ def upgrade() -> None:
         sa.Column('description', sa.String),
         sa.Column('status', sa.Enum(ETaskStatus), nullable=False, default=ETaskStatus.TODO),
         sa.Column('priority', sa.Enum(EPriority), nullable=False, default=EPriority.LOW),
+        sa.Column('created_at', sa.DateTime),
+        sa.Column('updated_at', sa.DateTime),
         sa.Column('company_id', sa.UUID, nullable=False),
         sa.Column('user_id', sa.UUID, nullable=False)
     )
