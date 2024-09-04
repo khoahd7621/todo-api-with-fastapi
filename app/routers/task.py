@@ -26,6 +26,11 @@ async def get_all_tasks(
     conditions = SearchTaskModel(company_id, user_id, page, size)
     return await TaskService.get_tasks(async_db, conditions)
 
+@router.get("/me", status_code=status.HTTP_200_OK, response_model=list[TaskViewModel])
+async def get_my_tasks(
+    user: User = Depends(AuthService.token_interceptor),
+    db: Session = Depends(get_db_context)):
+    return TaskService.get_my_tasks(db, user.id)
 
 @router.get("/{task_id}", status_code=status.HTTP_200_OK, response_model=TaskViewModel)
 async def get_task_by_id(
@@ -41,12 +46,6 @@ async def get_task_by_id(
         raise AccessDeniedError()
 
     return task
-
-@router.get("/me", status_code=status.HTTP_200_OK, response_model=list[TaskViewModel])
-async def get_my_tasks(
-    user: User = Depends(AuthService.token_interceptor),
-    db: Session = Depends(get_db_context)):
-    return TaskService.get_my_tasks(db, user.id)
 
 
 @router.post("", status_code=status.HTTP_201_CREATED, response_model=TaskViewModel)

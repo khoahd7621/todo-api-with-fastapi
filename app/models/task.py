@@ -22,11 +22,11 @@ class TaskCreateModel(BaseModel):
 
 
 class TaskUpdateModel(BaseModel):
-    summary: Optional[UUID] = Field(min_length=2)
+    summary: Optional[str] = Field(min_length=2)
     description: Optional[str]
     priority: EPriority = Field(default=EPriority.LOW)
-    company_id: Optional[UUID]
-    user_id: Optional[UUID]
+    company_id: Optional[str] = Field(default=None)
+    user_id: Optional[str] = Field(default=None)
 
 
 class TaskUpdateStatusModel(BaseModel):

@@ -84,6 +84,8 @@ def update_task(db: Session, id: UUID, data: TaskUpdateModel, user: User) -> Tas
             raise BadRequestError(msg="User not found")
         if user.company_id != data.company_id:
             raise BadRequestError(msg="User is not in this company")
+        utils.validate_uuid(data.user_id)
+        utils.validate_uuid(data.company_id)
         task.user_id = data.user_id
         task.company_id = data.company_id
     
